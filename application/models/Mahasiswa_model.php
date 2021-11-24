@@ -14,8 +14,14 @@ class Mahasiswa_model extends CI_Model {
             'email' => $this->input->post('email', true),
             'jurusan' => $this->input->post('jurusan', true),
         ];
-        
+
         return $this->db->insert('mahasiswa', $data);
+    }
+
+    public function hapusDataMahasiswa($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('mahasiswa');
     }
 
 }
