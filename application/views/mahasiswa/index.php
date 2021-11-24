@@ -1,6 +1,6 @@
 <div class="container">
 
-    <?php if ( $this->session->flashdata('flash') ) : ?>
+    <?php if ($this->session->flashdata('flash')) : ?>
         <div class="row mt-3">
             <div class="col-md-6">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -19,7 +19,23 @@
 
     <div class="row mt-3">
         <div class="col-md-6">
+            <form action="" method="post">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Cari data mahasiswa .." name="keyword">
+                    <button class="btn btn-primary" type="submit">Cari</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-6">
             <h3>Daftar Mahasiswa</h3>
+            <?php if (empty($mahasiswa)) : ?>
+                <div class="alert alert-danger" role="alert">
+                    Data mahasiswa tidak ditemukan.
+                </div>
+            <?php endif; ?>
             <ul class="list-group">
                 <?php foreach ($mahasiswa as $mhs) : ?>
                     <li class="list-group-item">
@@ -28,9 +44,9 @@
                                 <?= $mhs['nama']; ?>
                             </div>
                             <div class="col-md-5">
-                                <a href="<?= base_url()?>mahasiswa/detail/<?= $mhs['id']; ?>" class="badge btn btn-primary float-right">Detail</a>
-                                <a href="<?= base_url()?>mahasiswa/ubah/<?= $mhs['id']; ?>" class="badge btn btn-success float-right">Ubah</a>
-                                <a href="<?= base_url()?>mahasiswa/hapus/<?= $mhs['id']; ?>" class="badge btn btn-danger float-right" onclick="return confirm('Yakin mau menghapus?')">Hapus</a>
+                                <a href="<?= base_url() ?>mahasiswa/detail/<?= $mhs['id']; ?>" class="badge btn btn-primary float-right">Detail</a>
+                                <a href="<?= base_url() ?>mahasiswa/ubah/<?= $mhs['id']; ?>" class="badge btn btn-success float-right">Ubah</a>
+                                <a href="<?= base_url() ?>mahasiswa/hapus/<?= $mhs['id']; ?>" class="badge btn btn-danger float-right" onclick="return confirm('Yakin mau menghapus?')">Hapus</a>
                             </div>
                         </div>
                     </li>
