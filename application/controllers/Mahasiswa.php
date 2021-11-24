@@ -21,9 +21,12 @@ class Mahasiswa extends CI_Controller {
     public function tambah()
     {
         $data['judul'] = 'Form Tambah Data Mahasiswa';
+        $data['jurusan'] = ['Teknik Telekomunikasi', 'Teknik Perkapalan', 'Teknik Informatika', 'Teknik Elektronika', 'Teknik Elektro Industri', 'Teknik Mekatronika'];
+
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('nrp', 'NRP', 'required|numeric');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('jurusan', 'Jurusan', 'required');
 
         if ($this->form_validation->run() == FALSE ) {
             $this->load->view('templates/header', $data);
@@ -49,6 +52,28 @@ class Mahasiswa extends CI_Controller {
         $this->load->view('templates/header', $data);
         $this->load->view('mahasiswa/detail', $data);
         $this->load->view('templates/footer');
+    }
+
+    public function ubah($id)
+    {
+        $data['judul'] = 'Form Ubah Data Mahasiswa';
+        $data['mahasiswa'] = $this->Mahasiswa_model->getMahasiswaById($id);
+        $data['jurusan'] = ['Teknik Telekomunikasi', 'Teknik Perkapalan', 'Teknik Informatika', 'Teknik Elektronika', 'Teknik Elektro Industri', 'Teknik Mekatronika'];
+
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('nrp', 'NRP', 'required|numeric');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+        $this->form_validation->set_rules('jurusan', 'Jurusan', 'required');
+
+        if ($this->form_validation->run() == FALSE ) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('mahasiswa/ubah', $data);
+            $this->load->view('templates/footer');
+        } else {
+            $this->Mahasiswa_model->ubahDataMahasiswa();
+            $this->session->set_flashdata('flash', 'diubah');
+            redirect('mahasiswa');
+        }
     }
 
 }
