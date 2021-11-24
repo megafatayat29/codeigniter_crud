@@ -6,6 +6,7 @@ class Mahasiswa extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('Mahasiswa_model');
+        $this->load->library('form_validation');
     }
 
     public function index()
@@ -20,8 +21,17 @@ class Mahasiswa extends CI_Controller {
     public function tambah()
     {
         $data['judul'] = 'Form Tambah Data Mahasiswa';
-        $this->load->view('templates/header', $data);
-        $this->load->view('mahasiwa/tambah');
-        $this->load->view('templates/footer');
+        $this->form_validation->set_rules('nama', 'Nama', 'required');
+        $this->form_validation->set_rules('nrp', 'NRP', 'required|numeric');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');
+
+        if ($this->form_validation->run() == FALSE ) {
+            $this->load->view('templates/header', $data);
+            $this->load->view('mahasiswa/tambah');
+            $this->load->view('templates/footer');
+        } else {
+            $this->Mahasiswa_model->tambahDataMahasiswa();
+            redirect('mahasiswa');
+        }
     }
 }
