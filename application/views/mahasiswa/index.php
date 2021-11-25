@@ -1,14 +1,16 @@
 <div class="container">
 
+    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash') ?>"></div>
+    <input type="hidden" name="h" value="asdf" class="h">
     <?php if ($this->session->flashdata('flash')) : ?>
-        <div class="row mt-3">
+        <!-- <div class="row mt-3">
             <div class="col-md-6">
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     Data Mahasiswa <strong>berhasil</strong> <?= $this->session->flashdata('flash'); ?>.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
-        </div>
+        </div> -->
     <?php endif; ?>
 
     <div class="row mt-3">
@@ -46,7 +48,7 @@
                             <div class="col-md-5">
                                 <a href="<?= base_url() ?>mahasiswa/detail/<?= $mhs['id']; ?>" class="badge btn btn-primary float-right">Detail</a>
                                 <a href="<?= base_url() ?>mahasiswa/ubah/<?= $mhs['id']; ?>" class="badge btn btn-success float-right">Ubah</a>
-                                <a href="<?= base_url() ?>mahasiswa/hapus/<?= $mhs['id']; ?>" class="badge btn btn-danger float-right" onclick="return confirm('Yakin mau menghapus?')">Hapus</a>
+                                <a href="<?= base_url() ?>mahasiswa/hapus/<?= $mhs['id']; ?>" class="badge btn btn-danger float-right tombol-hapus">Hapus</a>
                             </div>
                         </div>
                     </li>
